@@ -1,0 +1,31 @@
+services:
+  app:
+    image: node:18-alpine
+    command: sh -c "npm run sever"
+    ports:
+      - :3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: teamdev_2
+      POSTGRES_PASSWORD: '123456'
+      POSTGRES_DB: Users
+
+  postgres:
+    image: postgres:16.2
+    environment:
+        POSTGRES_DB: Users
+        POSTGRES_USER: teamdev_2
+        POSTGRES_PASSWORD: '123456'
+    ports:
+        - "6543:5432"
+  
+   
+networks:
+  postgres:
+
+volumes:
+    app:
+    postgres:

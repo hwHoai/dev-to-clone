@@ -7,6 +7,9 @@ const configViewEngine = require("./config/viewEngine");
 const port = process.env.PORT;
 const webRoute = require("./routes/web");
 
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+
 
 configViewEngine(app);
 

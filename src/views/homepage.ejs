@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        	div {
+                display: block;
+            }
+    </style>
 </head>
 <body>
-    Hello World!!
+    <form action="/creating-user" method="POST">
+        <p>Create user</p>
+        
+        <div>
+            <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        </div>
+        
+        <div>
+            <label for="username">user name</label>
+        <input type="text" name="username" id="username">
+        </div>
+        
+        <div>
+            <label for="password">password</label>
+        <input type="text" name="password" id="password">
+        </div>
+        <button>create</button>
+    </form>
 </body>
 </html>
