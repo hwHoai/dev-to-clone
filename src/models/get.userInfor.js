@@ -1,14 +1,17 @@
-const {queryGetAllUserInfo} = require("./handle.query") 
+const {queryGetAllUserInfo} = require("./queryDB") 
 
-const clientGetNewUserInfor = (req) => {
+const getUserInforFromClient = (req) => {
     let email = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
-    return [email, userName, password]
+    return {
+        "email": `${email}`,
+        "userName": `${userName}`,
+        "password": `${password}`}
 }
 
 const dbGetFullUsers = async () => {
     return queryGetAllUserInfo()
 }
 
-module.exports = {clientGetNewUserInfor, dbGetFullUsers }
+module.exports = {getUserInforFromClient, dbGetFullUsers }
