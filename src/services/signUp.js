@@ -1,13 +1,24 @@
-const {clientGetNewUserInfor} = require("../models/get.userInfor.js")
-const {queryAddNewUserToDB} = require("../models/handle.query.js")
+const {getUserInforFromClient} = require("../models/get.userInfor.js")
+const {queryAddNewUserToDB} = require("../models/queryDB.js")
+const {isUserInforValid} = require("../middlewares/validateUser.js")
+const configUserInfo = require("../config/usersInfo.js")
 
-const createUser = async (req,res) => {
-    const [...newUserInfor] = await clientGetNewUserInfor(req)
 
-    await queryAddNewUserToDB(newUserInfor)
+const createNewUser = async (req,res) => {
+    const {...newUserInfor} = await getUserInforFromClient(req)
+    if(await isUserInforValid(newUserInfor)) {
+        await queryAddNewUserToDB(newUserInfor)
+        return {
+            "message":"Create User succeeded!!",
+            "email" : `${newUserInfor.email}`,
+            "userName" : `${newUserInfor.userName}`,
+            "password" : `${newUserInfor.password}`
+            }
+    } else {
+        return await configUserInfo(newUserInfor)
+    }
     
-    res.send('Create User succeeded!!')
     
 }
 
-module.exports = {createUser}
+module.exports = {createNewUser}
