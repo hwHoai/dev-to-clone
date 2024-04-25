@@ -1,17 +1,24 @@
-const {getUserInforFromClient} = require("../models/get.userInfor.js")
-const {queryGetUserByEmail} = require("../models/queryDB.js")
-const configUserInfo = require("../config/usersInfo.js")
+const { getUserInforFromClient } = require("../middlewares/clientUserInfor.js");
+const { dbUserInforByEmail } = require("../middlewares/queryDB.js");
+const { createLoginToken } = require("../middlewares/createToken.js");
+const { compareHashedPass } = require("../middlewares/hashPw.js");
 
 const logIn = async (req, res) => {
-    const {email,password} = await getUserInforFromClient(req)
-    const {...result} = await queryGetUserByEmail(email, password)
-    if (result.email) {
-        res.send("logged in!!")
-    } else {
-        res.send("User is not exist")
-    }
-    
-    
-}
+  const { email, password } = await getUserInforFromClient(req);
+  const user = await dbUserInforByEmail(email);
+  if (!user) {
+    return res.json({
+      message: "User is not exist",
+    });
+  }
+  if (!compareHashedPass(password, user.password)) {
+    return res.json({
+      message: "Password is incorrect",
+    });
+  }
 
-module.exports = logIn
+  const token = createLoginToken(user.userid);
+  res.json(token);
+};
+
+module.exports = logIn;

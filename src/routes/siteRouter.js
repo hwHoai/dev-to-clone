@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    homepage,
-    signUpPage,
-    logInPage,} = require("../controllers/SiteController")
-    
-router.get("/sign-up", signUpPage) 
-router.get("/log-in", logInPage) 
-router.use("/", homepage) 
+  homepage,
+  signUpPage,
+  logInPage,
+} = require("../controllers/SiteController");
 
-module.exports = router
+router.get("/signup", signUpPage);
+router.get("/login", logInPage);
+router.get("/", homepage);
+
+module.exports = router;

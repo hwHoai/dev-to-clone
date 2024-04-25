@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-    sendNewUserInfoToBD,
-    sendUserInfoToBD,
-    getFullUsersInfor,} = require("../controllers/user/UsersInforController")
+const logIn = require("../services/logIn");
+const signup = require("../services/signUp");
 
+router.post("/signup", signup);
+router.post("/login", logIn);
 
-router.get("/full-users", getFullUsersInfor)
-
-router.post("/creating-user", sendNewUserInfoToBD)
-router.post("/logging-in", sendUserInfoToBD)
-
-module.exports = router
+module.exports = router;
