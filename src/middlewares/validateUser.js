@@ -1,8 +1,8 @@
-const configUserInfo = require('../config/usersInfo.js')
+const configUserInfo = require('../config/usersInfo.js');
 
 const isUserInforValid = async newUserInfor => {
-    const result = await configUserInfo(newUserInfor)
-    return result.status
-}
+    const result = await configUserInfo(newUserInfor);
+    return result.status;
+};
 
-module.exports = { isUserInforValid }
+module.exports = { isUserInforValid };
