@@ -1,7 +1,4 @@
-const {
-	dbUserInforByEmail,
-	dbUserInforByUserName,
-} = require('../middlewares/queryDB');
+const User = require('../models/model.user')
 const configUserInfo = async newUserInfor => {
 	const { email, userName, password } = newUserInfor;
 
@@ -24,8 +21,8 @@ const configUserInfo = async newUserInfor => {
 		};
 	}
 
-	const isEmailExisted = await dbUserInforByEmail(email);
-	const isUserNameExisted = await dbUserInforByUserName(userName);
+	const isEmailExisted = await User.getUserInforByEmail(email);
+	const isUserNameExisted = await User.getUserInforByUserName(userName);
 	if (isEmailExisted) {
 		return {
 			message: 'Email Exist',

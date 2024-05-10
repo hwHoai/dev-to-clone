@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {
-    getFullUsersInfor,
-    userProfile,
-} = require('../controllers/user/UsersInforController');
+
+const User = require('../models/model.user');
 
 //[GET]
-router.get('/full-users', getFullUsersInfor);
-router.get('/user-profile', userProfile);
+router.get('/user-profile', User.getuserProfile);
 //[POST]
 
 module.exports = router;

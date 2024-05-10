@@ -4,7 +4,7 @@ const apiRespone = require('../routes/api');
 require('../routes/siteRouter');
 
 function route(app) {
-	app.use('/api', apiRespone);
+	app.use('/v1/api', apiRespone);
 	app.use('/user', userRouter);
 	app.use('/', siteRouter);
 }
